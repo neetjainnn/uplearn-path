@@ -10,7 +10,7 @@ import { Search } from "lucide-react";
 
 const difficulties = ["All", "Easy", "Medium", "Hard"] as const;
 const statuses = ["All", "Solved", "Attempted", "Unsolved"] as const;
-const allTags = ["Candlestick", "Chart Patterns", "Valuation", "Options", "Indicators", "Intraday", "Risk", "Strategy", "Python"];
+const allTags = ["Candlestick", "Chart Patterns", "Valuation", "Options", "Greeks", "Indicators", "Intraday", "Risk", "Strategy", "Python", "Volume", "Basics", "Order Types", "Automation"];
 
 const ProblemsPage = () => {
   const [search, setSearch] = useState("");
@@ -18,7 +18,6 @@ const ProblemsPage = () => {
   const [status, setStatus] = useState<string>("All");
   const [selectedBuckets, setSelectedBuckets] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
     return problems.filter((p) => {
@@ -49,6 +48,9 @@ const ProblemsPage = () => {
           <div className="flex flex-col gap-1">
             <span className="text-sm text-muted-foreground">{userStats.problemsSolved} / {userStats.totalProblems} Solved</span>
             <StreakCounter streak={userStats.currentStreak} />
+          </div>
+          <div className="ml-auto text-sm text-muted-foreground">
+            <strong className="text-foreground">{filtered.length}</strong> problems found
           </div>
         </div>
 

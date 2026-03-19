@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, Menu, X } from "lucide-react";
+import { Search, Menu, X, Flame } from "lucide-react";
 import { Button } from "./ui/button";
+import { userStats } from "@/data/data";
 
 const navLinks = [
   { label: "Discover", path: "/" },
-  { label: "Courses", path: "/buckets/investing-basics" },
+  { label: "Courses", path: "/buckets/stock-market-basics" },
   { label: "Problems", path: "/problems" },
   { label: "Contests", path: "/contests" },
 ];
@@ -35,15 +36,26 @@ const Navbar = () => {
             <Search className="h-3.5 w-3.5 text-muted-foreground" />
             <input placeholder="Search..." className="bg-transparent text-sm outline-none w-32 placeholder:text-muted-foreground" />
           </div>
+          {/* Streak indicator */}
+          <div className="flex items-center gap-1 px-2.5 py-1.5 rounded-button bg-warning/10 border border-warning/20">
+            <Flame className="h-4 w-4 text-warning" />
+            <span className="text-sm font-bold text-warning">{userStats.currentStreak}</span>
+          </div>
           <Button variant="outline" size="sm" className="rounded-button border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
             <Link to="/dashboard">My Dashboard</Link>
           </Button>
         </div>
 
         {/* Mobile */}
-        <button className="md:hidden" onClick={() => setOpen(!open)}>
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex md:hidden items-center gap-2">
+          <div className="flex items-center gap-1 px-2 py-1 rounded-button bg-warning/10">
+            <Flame className="h-3.5 w-3.5 text-warning" />
+            <span className="text-xs font-bold text-warning">{userStats.currentStreak}</span>
+          </div>
+          <button onClick={() => setOpen(!open)}>
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
       {open && (
         <div className="md:hidden border-t border-border bg-card p-4 space-y-3">
