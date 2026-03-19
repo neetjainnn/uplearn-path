@@ -1,10 +1,22 @@
 import { useMemo } from "react";
-import { generateHeatmapData } from "@/data/data";
+import { useAppContext } from "@/context/AppContext";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const HeatmapCalendar = () => {
-  const data = useMemo(() => generateHeatmapData(), []);
-  
+  const { state } = useAppContext();
+
+  const data = useMemo(() => {
+    const result: { date: string; count: number }[] = [];
+    const now = new Date();
+    for (let i = 365; i >= 0; i--) {
+      const d = new Date(now);
+      d.setDate(d.getDate() - i);
+      const dateStr = d.toISOString().split("T")[0];
+      result.push({ date: dateStr, count: state.activityLog[dateStr] || 0 });
+    }
+    return result;
+  }, [state.activityLog]);
+
   const getColor = (count: number) => {
     if (count === 0) return "bg-muted";
     if (count <= 2) return "bg-primary/20";
@@ -13,12 +25,10 @@ const HeatmapCalendar = () => {
     return "bg-primary";
   };
 
-  // Group data into weeks (columns of 7)
   const weeks: typeof data[] = [];
   const startDay = new Date(data[0].date).getDay();
   let currentWeek: typeof data = [];
-  
-  // Pad the first week
+
   for (let i = 0; i < startDay; i++) {
     currentWeek.push({ date: "", count: -1 });
   }
@@ -60,7 +70,7 @@ const HeatmapCalendar = () => {
         </div>
       </div>
       <p className="text-xs text-muted-foreground mt-3">
-        {totalSubmissions} submissions in the past one year · Total active days: {totalActive} · Max streak: 58
+        {totalSubmissions} submissions in the past one year · Total active days: {totalActive} · Max streak: {state.user.maxStreak}
       </p>
     </div>
   );
