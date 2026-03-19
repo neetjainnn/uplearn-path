@@ -14,6 +14,11 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
+  const isActive = (path: string) => {
+    if (path === "/") return location.pathname === "/";
+    return location.pathname.startsWith(path);
+  };
+
   return (
     <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border">
       <div className="container flex items-center justify-between h-16">
@@ -25,7 +30,15 @@ const Navbar = () => {
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map((l) => (
-            <Link key={l.path} to={l.path} className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === l.path ? "text-primary" : "text-muted-foreground"}`}>
+            <Link
+              key={l.path}
+              to={l.path}
+              className={`text-sm font-medium transition-colors hover:text-primary relative ${
+                isActive(l.path)
+                  ? "text-primary after:absolute after:-bottom-[18px] after:left-0 after:right-0 after:h-0.5 after:bg-primary"
+                  : "text-muted-foreground"
+              }`}
+            >
               {l.label}
             </Link>
           ))}
@@ -48,7 +61,7 @@ const Navbar = () => {
       {open && (
         <div className="md:hidden border-t border-border bg-card p-4 space-y-3">
           {navLinks.map((l) => (
-            <Link key={l.path} to={l.path} onClick={() => setOpen(false)} className="block text-sm font-medium text-muted-foreground hover:text-primary">
+            <Link key={l.path} to={l.path} onClick={() => setOpen(false)} className={`block text-sm font-medium ${isActive(l.path) ? "text-primary" : "text-muted-foreground hover:text-primary"}`}>
               {l.label}
             </Link>
           ))}
