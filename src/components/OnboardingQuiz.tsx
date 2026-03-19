@@ -70,7 +70,8 @@ const OnboardingQuiz = ({ open, onClose, isFirstVisit }: Props) => {
       // Calculate result
       setLoading(true);
       const goalAnswer = newAnswers[0] ?? 0;
-      const recommendedBucket = steps[0].options[goalAnswer]?.bucket || "investing-basics";
+      const goalOption = steps[0].options[goalAnswer];
+      const recommendedBucket = ("bucket" in goalOption ? goalOption.bucket : "investing-basics") as string;
       setTimeout(() => {
         setLoading(false);
         setResult(recommendedBucket);
