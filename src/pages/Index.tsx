@@ -3,17 +3,15 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BucketCard from "@/components/BucketCard";
-import ProblemRow from "@/components/ProblemRow";
-import ContestCard from "@/components/ContestCard";
 import CourseCard from "@/components/CourseCard";
-import { buckets, problems, contests, courses, instructors, subscriptionPlans } from "@/data/data";
+import { buckets, courses, instructors, subscriptionPlans } from "@/data/data";
 import { ArrowRight, TrendingUp, BookOpen, Users, Target, Play, Star, CheckCircle2, Zap } from "lucide-react";
 
 const stats = [
   { label: "Active Learners", value: "2,00,000+", icon: Users },
   { label: "Expert Courses", value: "50+", icon: BookOpen },
   { label: "Expert Mentors", value: "10+", icon: TrendingUp },
-  { label: "Practice Problems", value: "500+", icon: Target },
+  { label: "Hours of Content", value: "140+", icon: Target },
 ];
 
 const avatarGradients = [
@@ -61,7 +59,7 @@ const Index = () => {
                   <Link to="/buckets/stock-market-basics">Start Learning Free <ArrowRight className="ml-1 h-4 w-4" /></Link>
                 </Button>
                 <Button variant="outline" size="lg" className="rounded-button" asChild>
-                  <Link to="/problems">Practice Problems</Link>
+                  <Link to="/buckets/technical-analysis">Explore Courses</Link>
                 </Button>
               </div>
               {/* Instructor avatars strip */}
@@ -189,36 +187,6 @@ const Index = () => {
           <Button variant="outline" className="rounded-button" asChild>
             <Link to="/buckets/stock-market-basics">View All 50+ Courses <ArrowRight className="ml-1 h-4 w-4" /></Link>
           </Button>
-        </div>
-      </section>
-
-      {/* Problems Preview */}
-      <section className="container mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-semibold text-foreground mb-2">Practice with Real Market Problems</h2>
-          <p className="text-body-text max-w-xl mx-auto">Sharpen your skills with scenario-based problems. Discuss. Learn. Improve.</p>
-        </div>
-        <div className="rounded-lg bg-card shadow-card border border-border overflow-hidden">
-          <div className="grid grid-cols-[32px_40px_1fr_auto_100px_80px] items-center gap-3 px-4 py-2.5 bg-muted/50 text-xs font-medium text-muted-foreground border-b border-border">
-            <span></span><span>#</span><span>Title</span><span>Bucket</span><span>Difficulty</span><span className="text-right">Acceptance</span>
-          </div>
-          {problems.slice(0, 6).map((p) => <ProblemRow key={p.id} problem={p} />)}
-        </div>
-        <div className="text-center mt-6">
-          <Button variant="outline" className="rounded-button" asChild>
-            <Link to="/problems">View All 500+ Problems <ArrowRight className="ml-1 h-4 w-4" /></Link>
-          </Button>
-        </div>
-      </section>
-
-      {/* Contests */}
-      <section className="container mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-semibold text-foreground mb-2">Weekly Trading Contests</h2>
-          <p className="text-body-text max-w-xl mx-auto">Compete with traders across India. Win prizes and bragging rights.</p>
-        </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          {contests.slice(0, 2).map((c) => <ContestCard key={c.id} contest={c} />)}
         </div>
       </section>
 

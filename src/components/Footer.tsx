@@ -4,7 +4,7 @@ import { buckets } from "@/data/data";
 const Footer = () => (
   <footer className="border-t border-border bg-card mt-20">
     <div className="container py-12">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
         <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-2 mb-3">
             <div className="h-8 w-8 rounded-button bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">U</div>
@@ -21,14 +21,6 @@ const Footer = () => (
                 {b.emoji} {b.name}
               </Link>
             ))}
-          </div>
-        </div>
-        <div>
-          <h4 className="text-sm font-semibold text-foreground mb-3">Platform</h4>
-          <div className="space-y-2">
-            <Link to="/problems" className="block text-sm text-muted-foreground hover:text-primary">Practice Problems</Link>
-            <Link to="/contests" className="block text-sm text-muted-foreground hover:text-primary">Contests</Link>
-            <Link to="/dashboard" className="block text-sm text-muted-foreground hover:text-primary">My Dashboard</Link>
           </div>
         </div>
         <div>

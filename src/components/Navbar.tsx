@@ -7,8 +7,6 @@ import { userStats } from "@/data/data";
 const navLinks = [
   { label: "Discover", path: "/" },
   { label: "Courses", path: "/buckets/stock-market-basics" },
-  { label: "Problems", path: "/problems" },
-  { label: "Contests", path: "/contests" },
 ];
 
 const Navbar = () => {
@@ -41,9 +39,6 @@ const Navbar = () => {
             <Flame className="h-4 w-4 text-warning" />
             <span className="text-sm font-bold text-warning">{userStats.currentStreak}</span>
           </div>
-          <Button variant="outline" size="sm" className="rounded-button border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
-            <Link to="/dashboard">My Dashboard</Link>
-          </Button>
         </div>
 
         {/* Mobile */}
@@ -64,7 +59,6 @@ const Navbar = () => {
               {l.label}
             </Link>
           ))}
-          <Link to="/dashboard" onClick={() => setOpen(false)} className="block text-sm font-medium text-primary">My Dashboard</Link>
         </div>
       )}
     </nav>
